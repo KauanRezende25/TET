@@ -16,7 +16,7 @@ const CadastroUsuario = ({navigation}) =>
     var userObj = {nome:nome, email: email, senha:senha};
     var jsonBody = JSON.stringify(userObj);
     console.log(jsonBody);
-    fetch('https://tet-kauan.glitch.me/usuario', 
+    fetch('http://localhost:3000/usuario', 
     {
       method:'POST',
       headers: 

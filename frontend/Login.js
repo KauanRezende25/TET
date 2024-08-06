@@ -9,7 +9,7 @@ const Login = ({navigation}) =>
   {
     var userObj = { email: email, senha: senha};
     var jsonBody = JSON.stringify(userObj);
-    fetch('https://tet-kauan.glitch.me/login', 
+    fetch('http://localhost:3000/login', 
     {
       method:'POST',
       headers: 

@@ -10,7 +10,7 @@ const Principal = ({ route, navigation }) => {
     useEffect(() => {
   const fetchUserData = async () => {
     try {
-      const response = await fetch(`https://tet-kauan.glitch.me/usuarios/${usu_id}`, {
+      const response = await fetch(`http://localhost:3000/usuarios/${usu_id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ const Principal = ({ route, navigation }) => {
     console.log(jsonBody);
     console.log(usu_id);
 
-    fetch('https://tet-kauan.glitch.me/usuarios/' + usu_id, 
+    fetch('http://localhost:3000/usuarios/' + usu_id, 
     {
       method: 'PUT',
       headers: 
@@ -67,7 +67,7 @@ const Principal = ({ route, navigation }) => {
   };
 
   const Excluir = () => {
-    fetch('https://tet-kauan.glitch.me/usuarios/' + usu_id, 
+    fetch('http://localhost:3000/usuarios/' + usu_id, 
     {
       method: 'DELETE',
       headers: 

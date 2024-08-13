@@ -6,14 +6,15 @@ const CadastroUsuario = ({navigation}) =>
 {
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
+  const [formacao, setFormacao] = useState('');
+  const [escolaridade, setEscolaridade] = useState('');
   const [usuario, setUsuario] = useState('');
   const [senha, setSenha] = useState('');
   const [confirmasenha, setConfirmaSenha] = useState('');
 
-
   const Cadastrar = () =>
   {
-    var userObj = {nome:nome, email: email, senha:senha};
+    var userObj = {nome:nome,usuario:usuario,email: email, escolaridade: escolaridade, formacao: formacao,senha:senha};
     var jsonBody = JSON.stringify(userObj);
     console.log(jsonBody);
     fetch('http://localhost:3000/usuario', 
@@ -48,7 +49,7 @@ const CadastroUsuario = ({navigation}) =>
       <View style={styles.centerdiv}>
         <Image
           style={styles.logo}
-          source={require('/icon.png')}
+          source={require('./assets/icon.png')}
         />
       </View>
     <View style={styles.inputs}>
@@ -69,6 +70,18 @@ const CadastroUsuario = ({navigation}) =>
         onChangeText={event =>setEmail(event)}
         value={email}
         placeholder="E-mail"
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={event =>setEscolaridade(event)}
+        value={escolaridade}
+        placeholder="Escolaridade"
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={event =>setFormacao(event)}
+        value={formacao}
+        placeholder="Formação"
       />
       <TextInput
         style={styles.input}

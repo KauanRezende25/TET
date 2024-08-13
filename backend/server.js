@@ -11,18 +11,19 @@ app.use(cors())
 const db = {
   host: "54.173.126.116",
   port: 3306,
-  user: "00000000000",
-  password: "00000000000",
-  database: "00000000000",
+  user: "tet-simlab",
+  password: "isef123",
+  database: "tet-simlab",
 };
 
 const execSQLQuery = (sqlQry, id, res) => {
   const connection = mysql.createConnection(db);
   connection.query(sqlQry, id, (error, results, fields) => {
-    if (error) res.json(error);
+    if (error) res.json(error) 
+    
     else res.json(results);
     connection.end();
-    console.log("Executou: execSQLQuery");
+    console.log("Executou: execSQLQuery" + " " + id);
   });
 };
 
@@ -52,8 +53,8 @@ app.get("/usuarios", (req, res) => {
 });
 
 app.post("/usuario", (req, res) => {
-  const id = [req.body.nome, req.body.email, req.body.senha];
-  execSQLQuery("insert into usuario values (null, ?, ?, ?)", id, res);
+  const id = [req.body.nome, req.body.usuario,req.body.email,req.body.senha ,req.body.escolaridade,req.body.formacao];
+  execSQLQuery("insert into usuario values (null, ?, ?, ?, ?, ?, ?, 'padrao.png')", id, res);
 });
 
 app.listen(port, () => {
@@ -63,7 +64,7 @@ app.listen(port, () => {
 app.post('/login', async (req,res)=>
 {
   const id = [req.body.email, req.body.senha];
-  let [result] = await resultSQLQuery('SELECT * FROM usuario WHERE usu_email=? and usu_senha=?',id);
+  let [result] = await resultSQLQuery('SELECT * FROM usuario WHERE email=? and senha=?',id);
     
   if(result)
   {
@@ -78,14 +79,14 @@ app.post('/login', async (req,res)=>
 
 app.put("/usuarios/:id", (req, res) => {
   const id = [req.body.nome, req.body.email, req.body.senha,req.params.id];
-  execSQLQuery("update usuario set usu_nome=?,usu_email=?,usu_senha=? where usu_id=?", id, res);
+  execSQLQuery("update usuario set nome=?,email=?,senha=? where id=?", id, res);
 });
 
 app.delete("/usuarios/:id", (req, res) => {
   const id = [req.params.id];
-  execSQLQuery("DELETE FROM usuario WHERE usu_id=?", id, res);
+  execSQLQuery("DELETE FROM usuario WHERE id=?", id, res);
 });
 app.get("/usuarios/:id", (req, res) => {
   const id = [req.params.id];
-  execSQLQuery("Select usu_nome, usu_email, usu_senha from usuario where usu_id=?", id, res);
+  execSQLQuery("Select nome, email, senha from usuario where id=?", id, res);
 });

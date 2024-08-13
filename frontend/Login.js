@@ -9,6 +9,8 @@ const Login = ({navigation}) =>
   {
     var userObj = { email: email, senha: senha};
     var jsonBody = JSON.stringify(userObj);
+
+    console.log("aq entrou")
     fetch('http://localhost:3000/login', 
     {
       method:'POST',
@@ -42,7 +44,7 @@ const Login = ({navigation}) =>
       <View style={styles.centerdiv}>
         <Image
           style={styles.logo}
-          source={require('/icon.png')}
+          source={require('./assets/icon.png')}
         />
       </View>
       <View style={styles.inputs}>
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     color: "#fff",
     borderColor:"#fff",
-    outlineWidth: 0,
+    //outlineWidth: 0,
 
   },
   inputs:

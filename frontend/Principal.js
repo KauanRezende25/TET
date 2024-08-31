@@ -3,88 +3,86 @@ import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View, Text } fro
 
 const Principal = ({ route, navigation }) => {
   const usu_id = route.params.usu_id;
+  console.log('usu_id:', usu_id);
+
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-    useEffect(() => {
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/usuarios/${usu_id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/usuarios/${usu_id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const json = await response.json();
+        console.log('Dados retornados:', json); 
+
+        const usuario = json[0]; 
+        console.log(usuario.nome)
+        if (usuario) {
+          setNome(usuario.nome); 
+          setEmail(usuario.email); 
+          setSenha(usuario.senha); 
+        }
+      } catch (err) {
+        console.log('Fetch error:', err);
       }
+    };
 
-      const json = await response.json();
-      const usuario = json[0]; // Acesse o primeiro elemento do array
-      if (usuario) {
-        setNome(usuario.usu_nome);
-        setEmail(usuario.usu_email);
-        setSenha(usuario.usu_senha);
-      }
-    } catch (err) {
-      console.log('Fetch error:', err);
-    }
-  };
-
-  fetchUserData();
-}, []); 
- 
+    fetchUserData();
+  }, [usu_id]); // Atualize quando o usu_id mudar
 
   const Alterar = () => {
     const userObj = { nome, email, senha };
     const jsonBody = JSON.stringify(userObj);
-    console.log(jsonBody);
-    console.log(usu_id);
+    console.log('Dados a serem enviados:', jsonBody);
 
     fetch('http://localhost:3000/usuarios/' + usu_id, 
     {
       method: 'PUT',
-      headers: 
-      {
+      headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       },
       body: jsonBody,
     })
     .then(response => response.json())
-    .then(json => 
-    {
+    .then(json => {
       navigation.goBack();
-      console.log(json);
+      console.log('Resposta do PUT:', json);
     })
-    .catch((err) => 
-    {
-      console.log(err);
+    .catch((err) => {
+      console.log('Erro no PUT:', err);
     });
   };
 
   const Excluir = () => {
+    console.log('Usuário a ser excluído:', usu_id);
     fetch('http://localhost:3000/usuarios/' + usu_id, 
     {
       method: 'DELETE',
-      headers: 
-      {
+      headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
       }
     })
     .then(response => response.json())
-    .then(json => 
-    {
+    .then(json => {
       navigation.goBack();
-      console.log(json);
+      console.log('Resposta do DELETE:', json);
     })
-    .catch((err) => 
-    {
-      console.log(err);
+    .catch((err) => {
+      console.log('Erro no DELETE:', err);
     });
   };
 

@@ -3,6 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import CadastroUsuario from './CadastroUsuario';
 import Login from './Login';
 import Principal from './Principal';
+import list from './list';
+
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -11,6 +13,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Principal" component={Principal} />
         <Stack.Screen name="CadastroUsuario" component={CadastroUsuario} />
+        <Stack.Screen name="list" component={list} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -28,11 +28,12 @@ const Login = ({navigation}) =>
       if(json.mensagem=="ok")
       {
         navigation.navigate('Principal', {
-          usu_id: json.id,
+          usu_id: json.id
+          
         })
         
       }
-    })
+    })                                                                                                                                        
     .catch((err) => 
     {
       console.log(err);
@@ -45,6 +46,7 @@ const Login = ({navigation}) =>
         <Image
           style={styles.logo}
           source={require('./assets/icon.png')}
+          resizeMode="contain"
         />
       </View>
       <View style={styles.inputs}>
@@ -53,13 +55,14 @@ const Login = ({navigation}) =>
           onChangeText={event =>setEmail(event)}
           value={email}
           placeholder="E-mail"
+          placeholderTextColor="#fff"
         />
         <TextInput
           style={styles.input}
           onChangeText={event =>setSenha(event)}
           value={senha}
           placeholder="Senha"
-          keyboardType="numeric"
+          placeholderTextColor="#fff"
         />
       </View>
 
@@ -82,13 +85,18 @@ const styles = StyleSheet.create({
   body:
   {
     backgroundColor: "#404040",
+    height: 810,
+    width: 410,
+    color: "#fff"
   },
 
   botaodiv:
   {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 10,
+    marginTop:-50
   },
   
   input: {
@@ -100,39 +108,43 @@ const styles = StyleSheet.create({
     color: "#fff",
     borderColor:"#fff",
     //outlineWidth: 0,
+    width:200,
 
   },
   inputs:
   {
-    marginTop:50,
+    marginTop:-150,
     flex:1,
     justifyContent:"center",
     alignItems:"center",
     flexDirection:"column",
+    color: "#fff"
   },
   
   button: 
   {
-    height: 33,
-    margin: 9,
+    height: 0,
+    margin: 0,
     borderWidth: 0,
-    padding: 9,
-    paddingHorizontal:65,
+    paddingHorizontal:80,
+    paddingVertical:5,
     borderRadius: 20,
     backgroundColor: '#13E0AB',
     color:"#fff",
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
+    width:200,
+    marginBottom:20
     
   },
 
   registro:
   {
     color:"#fff",
-    marginTop:10,
+    marginTop:0,
     marginRight: 10,
-    marginBottom: 30
+    marginBottom: 315
   },
   logo:
   {
@@ -140,8 +152,7 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent:"center",
     alignItems: "center",
-    height:130,
-    width:130,
+    width:150,
   },
   centerdiv:
   {
@@ -154,7 +165,8 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 150,
+    height: 10,
+    marginTop:-50
   }
 
 });

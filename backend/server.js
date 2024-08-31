@@ -65,11 +65,12 @@ app.post('/login', async (req,res)=>
 {
   const id = [req.body.email, req.body.senha];
   let [result] = await resultSQLQuery('SELECT * FROM usuario WHERE email=? and senha=?',id);
+
     
   if(result)
   {
      
-     res.json({mensagem:"ok", "id":result.usu_id})   
+     res.json({mensagem:"ok", "id":result.id_usu})   
   }
   else
   {
@@ -79,14 +80,14 @@ app.post('/login', async (req,res)=>
 
 app.put("/usuarios/:id", (req, res) => {
   const id = [req.body.nome, req.body.email, req.body.senha,req.params.id];
-  execSQLQuery("update usuario set nome=?,email=?,senha=? where id=?", id, res);
+  execSQLQuery("update usuario set nome=?,email=?,senha=? where id_usu=?", id, res);
 });
 
 app.delete("/usuarios/:id", (req, res) => {
   const id = [req.params.id];
-  execSQLQuery("DELETE FROM usuario WHERE id=?", id, res);
+  execSQLQuery("DELETE FROM usuario WHERE id_usu=?", id, res);
 });
 app.get("/usuarios/:id", (req, res) => {
   const id = [req.params.id];
-  execSQLQuery("Select nome, email, senha from usuario where id=?", id, res);
+  execSQLQuery("Select nome, email, senha from usuario where id_usu=?", id, res);
 });

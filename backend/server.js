@@ -83,6 +83,12 @@ app.put("/usuarios/:id", (req, res) => {
   execSQLQuery("update usuario set nome=?,email=?,senha=? where id_usu=?", id, res);
 });
 
+app.put("/nome/:id", (req, res) => {
+  const id = [req.body.nome,req.params.id];
+  console.log(id)
+  execSQLQuery("update usuario set nome=? where id_usu=?", id, res);
+});
+
 app.delete("/usuarios/:id", (req, res) => {
   const id = [req.params.id];
   execSQLQuery("DELETE FROM usuario WHERE id_usu=?", id, res);

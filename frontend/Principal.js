@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { storeData, getData} from './storage'
 import { SafeAreaView, StyleSheet, TextInput, TouchableOpacity, View, Text } from 'react-native';
 
 const Principal = ({ route, navigation }) => {
-  const usu_id = route.params.usu_id;
-  console.log('usu_id:', usu_id);
+  //const usu_id = route.params.usu_id;
+  //console.log('usu_id:', usu_id);
 
-  const [nome, setNome] = useState('');
+  const [usu_id, setId] = useState('')  
+
+  const readId = async () =>
+  {
+    const usu_id= await getData()
+    setId(usu_id)
+  }
+  
+  readId()
+
+  console.log(usu_id)
+  
   const [email, setEmail] = useState('');
+  const [nome, setNome] = useState('');
   const [senha, setSenha] = useState('');
 
   useEffect(() => {

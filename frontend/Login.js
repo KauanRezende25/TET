@@ -1,4 +1,5 @@
 import React from 'react';
+import { storeData, getData} from './storage'
 import {SafeAreaView, StyleSheet, TextInput,TouchableOpacity,Image, View,Text} from 'react-native';
 const Login = ({navigation}) => 
 {
@@ -27,8 +28,9 @@ const Login = ({navigation}) =>
       console.log(json)
       if(json.mensagem=="ok")
       {
+        storeData(json.id)
         navigation.navigate('Principal', {
-          usu_id: json.id
+          //usu_id: json.id
           
         })
         
